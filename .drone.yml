@@ -6,6 +6,3 @@ steps:
   image: maven:latest
   commands:
   - mvn package
-  when:
-    event:
-    - push
