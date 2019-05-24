@@ -1,0 +1,11 @@
+kind: pipeline
+name: default
+
+steps:
+- name: plugin
+  image: openjdk:8-jdk-alpine
+  commands:
+  - mvn package
+  when:
+    event:
+    - push
