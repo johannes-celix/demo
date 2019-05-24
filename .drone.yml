@@ -3,7 +3,7 @@ name: default
 
 steps:
 - name: plugin
-  image: openjdk:8-jdk-alpine
+  image: maven:latest
   commands:
   - mvn package
   when:
