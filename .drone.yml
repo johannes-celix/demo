@@ -6,3 +6,4 @@ steps:
   image: maven:latest
   commands:
   - mvn package
+  
