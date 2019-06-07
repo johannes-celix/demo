@@ -6,4 +6,51 @@ steps:
   image: maven:latest
   commands:
   - mvn package
-  
+- name: send
+  image: plugins/webhook
+  settings:
+    urls:
+      - https://9a1797da.ngrok.io/testbuild
+    content_type: application/json
+    template: |
+      {
+        "properties": {
+          "accountId": "account-234",
+          "projectId": "project-123"
+        },
+        "builds": [
+          {
+            "schemaVersion": "1.0",
+            "pipelineId": "my-build-plan",
+            "buildNumber": 20,
+            "updateSequenceNumber": 1523494301448,
+            "displayName": "My Project build #16",
+            "description": "My Project build #16: Failed",
+            "label": "drone.io",
+            "url": "https://drone.io",
+            "state": "{{ build.status }}",
+            "lastUpdated": "2018-01-20T23:27:25+00:00",
+            "issueKeys": [
+              "DRON-1"
+            ],
+            "testInfo": {
+              "totalNumber": 150,
+              "numberPassed": 145,
+              "numberFailed": 5,
+              "numberSkipped": 0
+            },
+            "references": [
+              {
+                "commit": {
+                  "id": "08cd9c26b2b8d7cf6e6af6b49da8895d065c259f",
+                  "repositoryUri": "https://bitbucket.org/atlassian/biij-vendor-api"
+                },
+                "ref": {
+                  "name": "feature/ISSUE-123-some-work",
+                  "uri": "https://bitbucket.org/atlassian/biij-vendor-api/refs/feature/ISSUE-123-some-work"
+                }
+              }
+            ]
+          }
+        ]
+      }
