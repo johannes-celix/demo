@@ -28,7 +28,7 @@ steps:
             "description": "My Project build #18: Failed",
             "label": "drone.io",
             "url": "https://drone.io",
-            "state": "{{ build.status }}",
+            "state": "success",
             "lastUpdated": "2018-01-20T23:27:25+00:00",
             "issueKeys": [
               "DRON-1"
