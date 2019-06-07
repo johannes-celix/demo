@@ -22,13 +22,13 @@ steps:
           {
             "schemaVersion": "1.0",
             "pipelineId": "my-build-plan",
-            "buildNumber": 22,
+            "buildNumber": 23,
             "updateSequenceNumber": 1523494301448,
-            "displayName": "My Project build #22",
-            "description": "My Project build #22: Failed",
+            "displayName": "My Project build #23",
+            "description": "My Project build #23: Failed",
             "label": "drone.io",
             "url": "https://drone.io",
-            "state": "success",
+            "state": "failed",
             "lastUpdated": "2018-01-20T23:27:25+00:00",
             "issueKeys": [
               "DRON-3"
