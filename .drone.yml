@@ -5,6 +5,10 @@ steps:
 - name: plugin
   image: maven:latest
   commands:
+  - if [[ $DRONE_COMMIT_MESSAGE =~ ([A-Z][A-Z_0-9]+)-([0-9]+) ]]; then export DRONE_ISSUEKEY=${BASH_REMATCH[0]}; fi; 
+  - echo $DRONE_ISSUEKEY 
+  - export DRONE_TIMENOW=$(date +'%s')
+  - echo $DRONE_TIMENOW
   - mvn package
 - name: send
   image: plugins/webhook
@@ -22,16 +26,16 @@ steps:
           {
             "schemaVersion": "1.0",
             "pipelineId": "my-build-plan",
-            "buildNumber": 23,
-            "updateSequenceNumber": 1523494301448,
-            "displayName": "My Project build #23",
-            "description": "My Project build #23: Failed",
+            "buildNumber": {{build.number}},
+            "updateSequenceNumber": {{timenow}},
+            "displayName": "My Project build #{{build.number}}",
+            "description": "My Project build #{{build.number}}: {{build.status}}",
             "label": "drone.io",
             "url": "https://drone.io",
-            "state": "failed",
-            "lastUpdated": "2018-01-20T23:27:25+00:00",
+            "state": "{{build.status == "successful" ? "success" : "failed"}}",
+            "lastUpdated": "{{date -d @$DRONE_TIMENOW '+%Y-%m-%dT%H:%M:%S%:z'}}",
             "issueKeys": [
-              "DRON-3"
+              "{{issuekey}}"
             ],
             "testInfo": {
               "totalNumber": 150,
@@ -42,12 +46,12 @@ steps:
             "references": [
               {
                 "commit": {
-                  "id": "08cd9c26b2b8d7cf6e6af6b49da8895d065c259f",
-                  "repositoryUri": "https://bitbucket.org/atlassian/biij-vendor-api"
+                  "id": "{{commit}}",
+                  "repositoryUri": "{{repo.link}}"
                 },
                 "ref": {
-                  "name": "feature/ISSUE-123-some-work",
-                  "uri": "https://bitbucket.org/atlassian/biij-vendor-api/refs/feature/ISSUE-123-some-work"
+                  "name": "{{commit.branch}}",
+                  "uri": "{{commit.link}}"
                 }
               }
             ]
