@@ -1,0 +1,60 @@
+kind: pipeline
+name: default
+
+steps:
+- name: plugin
+  image: maven:latest
+  commands:
+  - if [[ $DRONE_COMMIT_MESSAGE =~ [A-Z][A-Z_0-9]+-[0-9]+ ]]; then export DRONE_ISSUEKEY=${BASH_REMATCH[0]}; fi; 
+  - echo $DRONE_ISSUEKEY 
+  - export DRONE_TIMENOW=$(date +'%s')
+  - echo $DRONE_TIMENOW
+  - mvn package
+- name: send
+  image: plugins/webhook
+  settings:
+    urls:
+      - https://tunnel.heinzl.dev/testbuild
+    content_type: application/json
+    template: |
+      {
+        "properties": {
+          "accountId": "account-234",
+          "projectId": "project-123"
+        },
+        "builds": [
+          {
+            "schemaVersion": "1.0",
+            "pipelineId": "my-build-plan",
+            "buildNumber": "{{build.number}}",
+            "updateSequenceNumber": "{{timenow}}",
+            "displayName": "My Project build #{{build.number}}",
+            "description": "My Project build #{{build.number}}: {{build.status}}",
+            "label": "drone.io",
+            "url": "https://drone.io",
+            "state": "{{build.status == 'successful' ? 'success' : 'failed'}}",
+            "lastUpdated": "{{date -d @$DRONE_TIMENOW '+%Y-%m-%dT%H:%M:%S%:z'}}",
+            "issueKeys": [
+              "{{issuekey}}"
+            ],
+            "testInfo": {
+              "totalNumber": 150,
+              "numberPassed": 145,
+              "numberFailed": 5,
+              "numberSkipped": 0
+            },
+            "references": [
+              {
+                "commit": {
+                  "id": "{{commit}}",
+                  "repositoryUri": "{{repo.link}}"
+                },
+                "ref": {
+                  "name": "{{commit.branch}}",
+                  "uri": "{{commit.link}}"
+                }
+              }
+            ]
+          }
+        ]
+      }
