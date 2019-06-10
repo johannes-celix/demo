@@ -1,0 +1,1 @@
+https://github.com/sford/yet-another-commit-checker/blob/master/src/main/java/com/isroot/stash/plugin/IssueKey.java

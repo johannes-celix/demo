@@ -26,13 +26,13 @@ steps:
           {
             "schemaVersion": "1.0",
             "pipelineId": "my-build-plan",
-            "buildNumber": {{build.number}},
-            "updateSequenceNumber": {{timenow}},
+            "buildNumber": "{{build.number}}",
+            "updateSequenceNumber": "{{timenow}}",
             "displayName": "My Project build #{{build.number}}",
             "description": "My Project build #{{build.number}}: {{build.status}}",
             "label": "drone.io",
             "url": "https://drone.io",
-            "state": "{{build.status == "successful" ? "success" : "failed"}}",
+            "state": "{{build.status == 'successful' ? 'success' : 'failed'}}",
             "lastUpdated": "{{date -d @$DRONE_TIMENOW '+%Y-%m-%dT%H:%M:%S%:z'}}",
             "issueKeys": [
               "{{issuekey}}"
