@@ -5,7 +5,7 @@ steps:
 - name: plugin
   image: maven:latest
   commands:
-  - if [[ $DRONE_COMMIT_MESSAGE =~ ([A-Z][A-Z_0-9]+)-([0-9]+) ]]; then export DRONE_ISSUEKEY=${BASH_REMATCH[0]}; fi; 
+  - if [[ $DRONE_COMMIT_MESSAGE =~ [A-Z][A-Z_0-9]+-[0-9]+ ]]; then export DRONE_ISSUEKEY=${BASH_REMATCH[0]}; fi; 
   - echo $DRONE_ISSUEKEY 
   - export DRONE_TIMENOW=$(date +'%s')
   - echo $DRONE_TIMENOW
