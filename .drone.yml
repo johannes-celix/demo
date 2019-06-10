@@ -10,5 +10,5 @@ steps:
   image: plugins/webhook
   settings:
     endpoint: https://tunnel.heinzl.dev
-    channel: [ general, ops ]
+    channel: general
     text: hello
