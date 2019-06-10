@@ -14,7 +14,7 @@ steps:
   image: plugins/webhook
   settings:
     urls:
-      - https://9a1797da.ngrok.io/testbuild
+      - https://tunnel.heinzl.dev/testbuild
     content_type: application/json
     template: |
       {
