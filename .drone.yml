@@ -8,9 +8,6 @@ steps:
   - mvn package
 - name: send
   image: johnny94/jira-software-cloud-webhook-plugin:latest
-  environment:
-    - DRONE_COMMIT_MESSAGE=${DRONE_COMMIT_MESSAGE}
-    - DRONE_BUILD_NUMBER=${DRONE_BUILD_NUMBER}
   settings:
     url: https://tunnel.heinzl.dev/testbuild
 
