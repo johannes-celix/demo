@@ -8,6 +8,7 @@ steps:
   - mvn package
 - name: send
   image: johnny94/jira-software-cloud-webhook-plugin:latest
+  pull: true
   settings:
     url: https://tunnel.heinzl.dev/testbuild
 
