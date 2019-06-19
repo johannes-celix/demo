@@ -11,7 +11,7 @@ steps:
   pull: always
   settings:
     url: https://tunnel.heinzl.dev/testbuild?baseUrl=https://jheinzl.atlassian.net
-    jiraconnectsecret: testpw
+    jiraconnectsecret: h8gs3gpZymIZbplUQV1npsblqyTMtcu5
   when:
     status:
     - success
