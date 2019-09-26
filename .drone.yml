@@ -7,7 +7,7 @@ steps:
   commands:
   - mvn package
 - name: send
-  image: johnny94/jira-software-cloud-webhook-plugin:latest
+  image: johnny94/jira-software-cloud-webhook-plugin:0.12
   pull: always
   settings:
     url: https://tunnel.heinzl.dev/builddata?baseUrl=https://jheinzl.atlassian.net
