@@ -2,17 +2,6 @@ kind: pipeline
 name: default
 
 
-
-
-
-
-
-
-
-
-
-
-
 steps:
 - name: plugin
   image: maven:latest
