@@ -10,7 +10,7 @@ steps:
   image: johnny94/jira-software-cloud-webhook-plugin:latest
   pull: always
   settings:
-    url: https://tunnel.heinzl.dev/testbuild?baseUrl=https://jheinzl.atlassian.net
+    url: https://tunnel.heinzl.dev/builddata?baseUrl=https://jheinzl.atlassian.net
     jiraconnectsecret: h8gs3gpZymIZbplUQV1npsblqyTMtcu5
   when:
     status:
